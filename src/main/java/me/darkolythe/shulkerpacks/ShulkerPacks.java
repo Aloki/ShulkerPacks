@@ -4,6 +4,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -53,9 +54,11 @@ public final class ShulkerPacks extends JavaPlugin {
 
         ConfigHandler.loadConfig(this);
 
+        new Metrics(this);
+
         shulkerlistener.checkIfValid();
 
-        getLogger().log(Level.INFO, plainSerializer.serialize(legacySerializer.deserialize(prefix + ChatColor.GREEN + "ShulkerPacks has been enabled!")));
+        getLogger().log(Level.INFO, plainSerializer.serialize(legacySerializer.deserialize(ChatColor.GREEN + "ShulkerPacks has been enabled!")));
     }
 
     /*
@@ -66,7 +69,7 @@ public final class ShulkerPacks extends JavaPlugin {
         for (Player player : this.openInventories.keySet()) {
             player.closeInventory();
         }
-        getLogger().log(Level.INFO, plainSerializer.serialize(legacySerializer.deserialize(prefix + ChatColor.RED + "ShulkerPacks has been disabled!")));
+        getLogger().log(Level.INFO, plainSerializer.serialize(legacySerializer.deserialize(ChatColor.RED + "ShulkerPacks has been disabled!")));
     }
 
 
